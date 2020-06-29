@@ -1,6 +1,6 @@
 # Arabic Bidirectional Text
 
-Write Arabic text on apps that doens't support bidirectional text.
+Write Arabic text on apps that doesn't support bidirectional text.
 
 ## Available Scripts
 
