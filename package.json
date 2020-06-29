@@ -1,6 +1,8 @@
 {
-  "name": "bidirectional",
+  "name": "bidit",
+  "description": "Write Arabic text on apps that doens't support bidirectional text.",
   "version": "0.1.0",
+  "author": "Samir Djelal <samir.djelal.webdesign@gmail.com>",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
