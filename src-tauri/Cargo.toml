@@ -1,5 +1,5 @@
 [package]
-name = "bidit"
+name = "app"
 version = "0.1.0"
 description = "Write Arabic text on apps that doens't support bidirectional text."
 authors = [ "Samir Djelal" ]
