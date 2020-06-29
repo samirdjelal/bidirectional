@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "tailwind:build": "tailwind build src/tailwind.css -o public/tailwind.build.css",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -30,5 +31,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@tailwindcss/ui": "^0.3.0",
+    "tailwindcss": "^1.4.6"
   }
 }
