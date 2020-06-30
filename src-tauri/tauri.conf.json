@@ -2,8 +2,8 @@
   "build": {
     "distDir": "../build",
     "devPath": "http://localhost:3000",
-    "beforeDevCommand": "",
-    "beforeBuildCommand": ""
+    "beforeDevCommand": "npm run start",
+    "beforeBuildCommand": "npm run build"
   },
   "ctx": {},
   "tauri": {
@@ -23,7 +23,7 @@
       ],
       "resources": [],
       "externalBin": [],
-      "copyright": "",
+      "copyright": "Samir Djelal",
       "category": "DeveloperTool",
       "shortDescription": "",
       "longDescription": "",
