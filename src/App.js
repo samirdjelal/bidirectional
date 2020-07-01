@@ -19,7 +19,8 @@ class App extends React.Component {
 				<div className="py-2 px-6">
 					<div className="flex justify-between">
 						<label htmlFor="email" className="block font-bold text-md font-medium leading-7 text-gray-700 select-none">Enter text</label>
-						<label htmlFor="email" className="block font-bold text-right text-md font-medium leading-7 text-gray-700 select-none">أَدْخَلْ نَصَآ</label>
+						<label htmlFor="email" className="block font-bold text-right text-md font-medium leading-7 text-gray-700 select-none">أَدْخَلْ
+							نَصَآ</label>
 					</div>
 					<div className="mt-1 relative rounded-md shadow-sm">
 						<textarea rows={6} className="form-input text-xl block w-full sm:text-md sm:leading-5" onChange={this.handleText}
@@ -30,14 +31,15 @@ class App extends React.Component {
 				<div className="py-2 px-6">
 					<div className="flex justify-between">
 						<label htmlFor="email" className="block font-bold text-md  font-medium leading-7 text-gray-700 select-none">Converted text</label>
-						<label htmlFor="email" className="block font-bold text-right text-md font-medium leading-7 text-gray-700 select-none">النَّصُّ الْمُحَوِّلُ</label>
+						<label htmlFor="email" className="block font-bold text-right text-md font-medium leading-7 text-gray-700 select-none">النَّصُّ
+							الْمُحَوِّلُ</label>
 					</div>
 					<div className="mt-1 relative rounded-md shadow-sm">
 						<textarea rows={6} className="form-input text-xl bg-gray-100 block w-full sm:text-md sm:leading-5" style={{direction: 'rtl'}}
-						          value={this.state.outputText} readOnly/>
+						          value={this.state.outputText} readOnly onClick={e => e.target.select()}/>
 					</div>
 				</div>
-				
+			
 			</div>
 		);
 	}
@@ -46,8 +48,6 @@ class App extends React.Component {
 	handleText(e) {
 		const inputText = e.target.value;
 		const outputText = arabicText(inputText)['reverse']();
-		// console.log(outputText)
-		// navigator.clipboard.writeText(outputText).then(r => console.log(r));
 		this.setState({outputText: outputText});
 	}
 }
