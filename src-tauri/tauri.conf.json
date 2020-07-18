@@ -3,12 +3,12 @@
     "distDir": "../build",
     "devPath": "http://localhost:3000",
     "beforeDevCommand": "npm run start",
-    "beforeBuildCommand": "npm run build"
+    "beforeBuildCommand": ""
   },
   "ctx": {},
   "tauri": {
     "embeddedServer": {
-      "active": true
+      "active": false
     },
     "bundle": {
       "active": true,

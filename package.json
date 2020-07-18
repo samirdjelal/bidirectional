@@ -1,7 +1,7 @@
 {
 	"name": "bidirectional",
 	"description": "Write Arabic text on apps that doesn't support bidirectional text.",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": "Samir Djelal <samir.djelal.webdesign@gmail.com>",
 	"private": true,
 	"homepage": "./",
@@ -22,6 +22,7 @@
 	],
 	"dependencies": {
 		"react": "^16.13.1",
+		"react-app-polyfill": "^1.0.6",
 		"react-dom": "^16.13.1",
 		"react-scripts": "3.4.1",
 		"tauri": "^0.7.1"

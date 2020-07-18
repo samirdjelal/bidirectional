@@ -1,6 +1,6 @@
 [package]
 name = "app"
-version = "0.1.0"
+version = "0.1.1"
 description = "Write Arabic text on apps that doesn't support bidirectional text."
 authors = [ "Samir Djelal" ]
 license = "MIT"
