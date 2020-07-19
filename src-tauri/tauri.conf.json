@@ -8,7 +8,7 @@
   "ctx": {},
   "tauri": {
     "embeddedServer": {
-      "active": false
+      "active": true
     },
     "bundle": {
       "active": true,
@@ -39,7 +39,7 @@
       "exceptionDomain": ""
     },
     "whitelist": {
-      "all": true
+      "all": false
     },
     "window": {
       "title": "مُنَسِّقُ النَّصِّ الْعَرَبِيِّ",
@@ -50,13 +50,13 @@
       "maximizable": false
     },
     "security": {
-      "csp": "default-src blob: data: filesystem: ws: file: http: https: 'unsafe-eval' 'unsafe-inline'"
+      "csp": "default-src blob: data: filesystem: ws: http: https: 'unsafe-eval' 'unsafe-inline'"
     },
     "edge": {
-      "active": true
+      "active": false
     },
     "inliner": {
-      "active": true
+      "active": false
     }
   }
 }
