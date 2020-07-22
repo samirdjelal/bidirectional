@@ -8,4 +8,4 @@ A web version is available at https://samirdjelal.github.io/bidirectional-web/
 
 # Screenshot
 
-![Bidirectional App Interface](screenshot.png)
+<img src="screenshot.png" width="600px" alt="Arabic Bidirectional Text"/>
