@@ -8,4 +8,4 @@ A web version is available at https://samirdjelal.github.io/bidirectional-web/
 
 # Screenshot
 
-<img src="screenshot.png" align="center" width="600px" alt="Arabic Bidirectional Text"/>
+<img src="screenshot.png" width="600px" alt="Arabic Bidirectional Text"/>
