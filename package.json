@@ -21,11 +21,13 @@
 		"text"
 	],
 	"dependencies": {
-		"react": "^16.13.1",
+		"@tauri-apps/api": "^1.0.0-beta-rc.1",
+		"@tauri-apps/cli": "^1.0.0-beta-rc.1",
+		"react": "^16.14.0",
 		"react-app-polyfill": "^1.0.6",
-		"react-dom": "^16.13.1",
-		"react-scripts": "3.4.1",
-		"tauri": "^0.7.1"
+		"react-dom": "^16.14.0",
+		"react-scripts": "^3.4.3",
+		"tauri": "^0.14.1"
 	},
 	"scripts": {
 		"start": "react-scripts start",
@@ -56,7 +58,7 @@
 		]
 	},
 	"devDependencies": {
-		"@tailwindcss/ui": "^0.3.0",
-		"tailwindcss": "^1.4.6"
+		"@tailwindcss/ui": "^0.3.1",
+		"tailwindcss": "^1.9.3"
 	}
 }

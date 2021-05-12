@@ -1,18 +1,18 @@
 [package]
-name = "app"
-version = "0.1.1"
-description = "Write Arabic text on apps that doesn't support bidirectional text."
-authors = [ "Samir Djelal" ]
-license = "MIT"
+name = "bidirectional"
+version = "0.1.0"
+description = "A Tauri App"
+authors = [ "you" ]
+license = ""
 repository = ""
-default-run = "app"
+default-run = "bidirectional"
 edition = "2018"
 build = "src/build.rs"
 
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = [ "derive" ] }
-tauri = { version = "0.5", features = [ ] }
+tauri = { version = "0.11", features = [ "all-api" ] }
 
 [target."cfg(windows)".build-dependencies]
 winres = "0.1"
@@ -22,5 +22,5 @@ embedded-server = [ "tauri/embedded-server" ]
 no-server = [ "tauri/no-server" ]
 
 [[bin]]
-name = "app"
+name = "bidirectional"
 path = "src/main.rs"

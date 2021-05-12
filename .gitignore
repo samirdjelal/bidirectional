@@ -3,7 +3,7 @@
 /.vscode
 yarn.lock
 package-lock.json
-
+/.idea
 # dependencies
 /node_modules
 /.pnp

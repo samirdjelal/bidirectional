@@ -11,6 +11,11 @@ class App extends React.Component {
 		this.handleText = this.handleText.bind(this);
 	}
 	
+	async componentDidMount() {
+	
+	}
+	
+	
 	render() {
 		return (
 			<div>

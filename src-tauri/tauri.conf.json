@@ -1,9 +1,10 @@
 {
   "build": {
     "distDir": "../build",
-    "devPath": "http://localhost:3000",
+    "devPath": "http://localhost:3000/",
     "beforeDevCommand": "npm run start",
-    "beforeBuildCommand": ""
+    "beforeBuildCommand": "npm run tailwind:build && npm run build",
+    "withGlobalTauri": true
   },
   "ctx": {},
   "tauri": {
@@ -13,7 +14,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.samirdjelal.bidirectional",
+      "identifier": "com.tauri.dev",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -23,7 +24,7 @@
       ],
       "resources": [],
       "externalBin": [],
-      "copyright": "Samir Djelal",
+      "copyright": "",
       "category": "DeveloperTool",
       "shortDescription": "",
       "longDescription": "",
@@ -38,25 +39,21 @@
       },
       "exceptionDomain": ""
     },
-    "whitelist": {
-      "all": false
+    "allowlist": {
+      "all": true
     },
     "window": {
-      "title": "مُنَسِّقُ النَّصِّ الْعَرَبِيِّ",
-      "width": 450,
-      "height": 580,
-      "resizable": false,
-      "fullscreen": false,
-      "maximizable": false
+      "title": "Bidirectional",
+      "width": 400,
+      "height": 600,
+      "resizable": true,
+      "fullscreen": false
     },
     "security": {
       "csp": "default-src blob: data: filesystem: ws: http: https: 'unsafe-eval' 'unsafe-inline'"
     },
-    "edge": {
-      "active": false
-    },
     "inliner": {
-      "active": false
+      "active": true
     }
   }
 }
