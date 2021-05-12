@@ -1,10 +1,10 @@
 [package]
 name = "bidirectional"
-version = "0.1.0"
-description = "A Tauri App"
-authors = [ "you" ]
-license = ""
-repository = ""
+version = "0.2.0"
+description = "Write Arabic text on apps that don't support the bidirectional text."
+authors = [ "Samir Djelal" ]
+license = "MIT"
+repository = "https://github.com/samirdjelal/bidirectional"
 default-run = "bidirectional"
 edition = "2018"
 build = "src/build.rs"
