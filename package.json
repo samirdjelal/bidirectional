@@ -26,8 +26,7 @@
 		"react": "^16.14.0",
 		"react-app-polyfill": "^1.0.6",
 		"react-dom": "^16.14.0",
-		"react-scripts": "^3.4.3",
-		"tauri": "^0.14.1"
+		"react-scripts": "^3.4.3"
 	},
 	"scripts": {
 		"start": "react-scripts start",

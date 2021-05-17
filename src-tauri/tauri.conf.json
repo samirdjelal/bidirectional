@@ -1,20 +1,19 @@
 {
+  "package": {
+    "productName": "bidirectional",
+    "version": "0.2.0"
+  },
   "build": {
     "distDir": "../build",
     "devPath": "http://localhost:3000/",
     "beforeDevCommand": "npm run start",
-    "beforeBuildCommand": "npm run build && npm run tailwind:build",
-    "withGlobalTauri": true
+    "beforeBuildCommand": ""
   },
-  "ctx": {},
   "tauri": {
-    "embeddedServer": {
-      "active": true
-    },
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.dev",
+      "identifier": "com.samirdjelal.bidirectional",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -32,28 +31,37 @@
         "depends": [],
         "useBootstrapper": false
       },
-      "osx": {
+      "macOS": {
         "frameworks": [],
         "minimumSystemVersion": "",
-        "useBootstrapper": false
+        "useBootstrapper": false,
+        "exceptionDomain": "",
+        "signingIdentity": null,
+        "entitlements": null
       },
-      "exceptionDomain": ""
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "updater": {
+      "active": false
     },
     "allowlist": {
       "all": true
     },
-    "window": {
-      "title": "Bidirectional",
-      "width": 400,
-      "height": 600,
-      "resizable": true,
-      "fullscreen": false
-    },
+    "windows": [
+      {
+        "title": "Bidirectional",
+        "width": 450,
+        "height": 600,
+        "resizable": false,
+        "fullscreen": false
+      }
+    ],
     "security": {
-      "csp": "default-src blob: data: filesystem: ws: http: https: 'unsafe-eval' 'unsafe-inline'"
-    },
-    "inliner": {
-      "active": true
+      "csp": "default-src blob: data: filesystem: ws: http: https: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
     }
   }
 }
