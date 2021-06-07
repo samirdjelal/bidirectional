@@ -1,10 +1,10 @@
-String.prototype.toCharArray = function() {
+String.prototype.toCharArray = function () {
 	return this.split('')
 }
-String.prototype.toCharCode = function() {
+String.prototype.toCharCode = function () {
 	return this.charCodeAt(0)
 }
-String.prototype.reverse = function() {
+String.prototype.reverse = function () {
 	return this.toCharArray().reverse().join('')
 }
 
@@ -24,7 +24,7 @@ const LAMALEF_LINK_MAP = ['\uFEF5', '\uFEF7', '\u0624', '\uFEF9', '\u0626', '\uF
 const CHAR_LINK_TYPE = [NONE, BEFORE, BEFORE, BEFORE, BEFORE, DUAL, BEFORE, DUAL, BEFORE, DUAL, DUAL, DUAL, DUAL, DUAL, BEFORE, BEFORE, BEFORE, BEFORE, DUAL, DUAL, DUAL, DUAL, DUAL, DUAL, DUAL, DUAL, NONE, NONE, NONE, NONE, NONE, CAUSING, DUAL, DUAL, DUAL, DUAL, DUAL, DUAL, DUAL, BEFORE, DUAL, DUAL];
 
 function isAlefChar(char) {
-	return (char === '\u0622' || char === '\u0623' || char === '\u0625' || char === '\u0627')
+	return ['\u0622', '\u0623', '\u0625', '\u0627'].includes(char);
 }
 
 function isLamChar(char) {
@@ -44,7 +44,7 @@ function isLinkableBefore(char) {
 		return false
 	}
 	const link_type = CHAR_LINK_TYPE[char.toCharCode() - LINK_MAP_RANGE[0].toCharCode()];
-	return (link_type === BEFORE || link_type === DUAL || link_type === CAUSING)
+	return [BEFORE, DUAL, CAUSING].includes(link_type);
 }
 
 function isLinkableAfter(char) {
@@ -52,7 +52,8 @@ function isLinkableAfter(char) {
 		return false
 	}
 	const link_type = CHAR_LINK_TYPE[char.toCharCode() - LINK_MAP_RANGE[0].toCharCode()];
-	return (link_type === DUAL || link_type === CAUSING)
+	return [DUAL, CAUSING].includes(link_type);
+	
 }
 
 function getCharLinkType(char) {
