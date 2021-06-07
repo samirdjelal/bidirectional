@@ -1,12 +1,9 @@
-// eslint-disable-next-line no-extend-native
 String.prototype.toCharArray = function() {
 	return this.split('')
 }
-// eslint-disable-next-line no-extend-native
 String.prototype.toCharCode = function() {
 	return this.charCodeAt(0)
 }
-// eslint-disable-next-line no-extend-native
 String.prototype.reverse = function() {
 	return this.toCharArray().reverse().join('')
 }
@@ -26,113 +23,110 @@ const LAMALEF_LINK_MAP_RANGE = ['\u0622', '\u0627'];
 const LAMALEF_LINK_MAP = ['\uFEF5', '\uFEF7', '\u0624', '\uFEF9', '\u0626', '\uFEFB'];
 const CHAR_LINK_TYPE = [NONE, BEFORE, BEFORE, BEFORE, BEFORE, DUAL, BEFORE, DUAL, BEFORE, DUAL, DUAL, DUAL, DUAL, DUAL, BEFORE, BEFORE, BEFORE, BEFORE, DUAL, DUAL, DUAL, DUAL, DUAL, DUAL, DUAL, DUAL, NONE, NONE, NONE, NONE, NONE, CAUSING, DUAL, DUAL, DUAL, DUAL, DUAL, DUAL, DUAL, BEFORE, DUAL, DUAL];
 
-function isAlefChar(_a) {
-	return (_a === '\u0622' || _a === '\u0623' || _a === '\u0625' || _a === '\u0627')
+function isAlefChar(char) {
+	return (char === '\u0622' || char === '\u0623' || char === '\u0625' || char === '\u0627')
 }
 
-function isLamChar(_a) {
-	return (_a === LAM_CHAR)
+function isLamChar(char) {
+	return (char === LAM_CHAR)
 }
 
-function isTransparentChar(_a) {
-	return (_a >= '\u064B' && _a <= '\u065E')
+function isTransparentChar(char) {
+	return (char >= '\u064B' && char <= '\u065E')
 }
 
-function inLinkRange(_a) {
-	return (_a >= LINK_MAP_RANGE[0] && _a <= LINK_MAP_RANGE[1])
+function inLinkRange(char) {
+	return (char >= LINK_MAP_RANGE[0] && char <= LINK_MAP_RANGE[1])
 }
 
-function isLinkableBefore(_a) {
-	if (!inLinkRange(_a)) {
+function isLinkableBefore(char) {
+	if (!inLinkRange(char)) {
 		return false
 	}
-	const _b = CHAR_LINK_TYPE[_a.toCharCode() - LINK_MAP_RANGE[0].toCharCode()];
-	return (_b === BEFORE || _b === DUAL || _b === CAUSING)
+	const link_type = CHAR_LINK_TYPE[char.toCharCode() - LINK_MAP_RANGE[0].toCharCode()];
+	return (link_type === BEFORE || link_type === DUAL || link_type === CAUSING)
 }
 
-function isLinkableAfter(_a) {
-	if (!inLinkRange(_a)) {
+function isLinkableAfter(char) {
+	if (!inLinkRange(char)) {
 		return false
 	}
-	const _b = CHAR_LINK_TYPE[_a.toCharCode() - LINK_MAP_RANGE[0].toCharCode()];
-	return (_b === DUAL || _b === CAUSING)
+	const link_type = CHAR_LINK_TYPE[char.toCharCode() - LINK_MAP_RANGE[0].toCharCode()];
+	return (link_type === DUAL || link_type === CAUSING)
 }
 
-function getCharLinkType(_a) {
-	if (!inLinkRange(_a)) {
+function getCharLinkType(char) {
+	if (!inLinkRange(char)) {
 		return NONE
 	}
-	const _b = _a.toCharCode() - LINK_MAP_RANGE[0].toCharCode();
-	return CHAR_LINK_TYPE[_b]
+	return CHAR_LINK_TYPE[char.toCharCode() - LINK_MAP_RANGE[0].toCharCode()]
 }
 
-function linkChar(_a, _b) {
-	if (!inLinkRange(_a)) {
-		return _a
+function linkChar(char, b) {
+	if (!inLinkRange(char)) {
+		return char
 	}
-	const _c = _a.toCharCode() - LINK_MAP_RANGE[0].toCharCode();
-	switch (CHAR_LINK_TYPE[_c]) {
+	const link = char.toCharCode() - LINK_MAP_RANGE[0].toCharCode();
+	switch (CHAR_LINK_TYPE[link]) {
 		case BEFORE:
-			return String['fromCharCode'](LINK_MAP[_c].toCharCode() + (_b % 2));
+			return String['fromCharCode'](LINK_MAP[link].toCharCode() + (b % 2));
 		case DUAL:
-			return String['fromCharCode'](LINK_MAP[_c].toCharCode() + _b);
+			return String['fromCharCode'](LINK_MAP[link].toCharCode() + b);
 		case NONE:
-			return String['fromCharCode'](LINK_MAP[_c].toCharCode());
+			return String['fromCharCode'](LINK_MAP[link].toCharCode());
 		case CAUSING:
 		default:
-			return _a
+			return char
 	}
 }
 
-function linkLamAlef(_a, _b) {
-	if (!isAlefChar(_a)) {
-		return _a
+function linkLamAlef(char, b) {
+	if (!isAlefChar(char)) {
+		return char
 	}
-	const _c = _a.toCharCode() - LAMALEF_LINK_MAP_RANGE[0].toCharCode();
-	return String['fromCharCode'](LAMALEF_LINK_MAP[_c].toCharCode() + (_b % 2))
+	return String['fromCharCode'](LAMALEF_LINK_MAP[char.toCharCode() - LAMALEF_LINK_MAP_RANGE[0].toCharCode()].toCharCode() + (b % 2))
 }
 
-function internalLinkText(_a) {
-	let _b;
-	let _c = ISOLATED;
-	let _d = 0;
-	for (let _e = 0; _e < _a['length']; _e++) {
-		const _arg = _a[_e];
-		if (getCharLinkType(_arg) === CAUSING) {
-			_a[_e - _d] = _arg;
-			_c = MEDIAL;
+function internalLinkText(text) {
+	let finalCharPosition;
+	let position = ISOLATED;
+	let previous = 0;
+	for (let i = 0; i < text['length']; i++) {
+		const char = text[i];
+		if (getCharLinkType(char) === CAUSING) {
+			text[i - previous] = char;
+			position = MEDIAL;
 			continue
 		}
-		let _f = _e + 1;
-		while (_f < _a['length'] - 1 && isTransparentChar(_a[_f])) {
-			_f++
+		let nextChar = i + 1;
+		while (nextChar < text['length'] - 1 && isTransparentChar(text[nextChar])) {
+			nextChar++
 		}
-		_b = (_c === INITIAL || _c === MEDIAL) ? FINAL : ISOLATED;
-		if (_f < _a['length']) {
-			if (isLamChar(_arg) && isAlefChar(_a[_f])) {
-				_a[_e - _d] = linkLamAlef(_a[_f], _b);
-				_c = _b;
-				_d += _f - _e;
-				_e = _f;
+		finalCharPosition = (position === INITIAL || position === MEDIAL) ? FINAL : ISOLATED;
+		if (nextChar < text['length']) {
+			if (isLamChar(char) && isAlefChar(text[nextChar])) {
+				text[i - previous] = linkLamAlef(text[nextChar], finalCharPosition);
+				position = finalCharPosition;
+				previous += nextChar - i;
+				i = nextChar;
 				continue
 			}
-			if (isLinkableAfter(_arg) && isLinkableBefore(_a[_f])) {
-				_b |= INITIAL
+			if (isLinkableAfter(char) && isLinkableBefore(text[nextChar])) {
+				finalCharPosition |= INITIAL
 			}
 		}
-		_a[_e - _d] = linkChar(_arg, _b);
-		_c = _b
+		text[i - previous] = linkChar(char, finalCharPosition);
+		position = finalCharPosition
 	}
-	return _d
+	return previous
 }
 
-function linkText(_a) {
-	if (_a == null || _a['length'] === 0) {
-		return _a
+function linkText(text) {
+	if (text == null || text['length'] === 0) {
+		return text
 	}
-	const _b = _a.toCharArray();
-	const _c = internalLinkText(_b);
-	return _b['slice'](0, _b['length'] - _c)['join']('')
+	const charArray = text.toCharArray();
+	return charArray['slice'](0, charArray['length'] - internalLinkText(charArray))['join']('')
 }
 
 export default linkText;
