@@ -1,9 +1,12 @@
+// eslint-disable-next-line
 String.prototype.toCharArray = function () {
 	return this.split('')
 }
+// eslint-disable-next-line
 String.prototype.toCharCode = function () {
 	return this.charCodeAt(0)
 }
+// eslint-disable-next-line
 String.prototype.reverse = function () {
 	return this.toCharArray().reverse().join('')
 }

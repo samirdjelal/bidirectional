@@ -28,13 +28,11 @@
       "shortDescription": "",
       "longDescription": "",
       "deb": {
-        "depends": [],
-        "useBootstrapper": false
+        "depends": []
       },
       "macOS": {
         "frameworks": [],
         "minimumSystemVersion": "",
-        "useBootstrapper": false,
         "exceptionDomain": "",
         "signingIdentity": null,
         "entitlements": null
@@ -54,10 +52,11 @@
     "windows": [
       {
         "title": "Bidirectional",
-        "width": 450,
+        "width": 400,
         "height": 600,
         "resizable": false,
-        "fullscreen": false
+        "fullscreen": false,
+        "alwaysOnTop": true
       }
     ],
     "security": {
