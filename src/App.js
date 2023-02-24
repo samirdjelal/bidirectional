@@ -1,14 +1,16 @@
 import React from "react";
 import "./App.css";
 import CopySvg from "./components/CopySvg";
+import PasteSvg from "./components/PasteSvg";
 import arabicText from "./Converter";
 import AlertCopy from "./components/AlertCopy";
 
 function App(props) {
-	// State
+  // State
+  const [normalText, setNormalText] = React.useState("");
   const [outputText, setOutputText] = React.useState("");
   const [triggerCopyAlert, setTriggerCopyAlert] = React.useState(false);
-  // Convert text 
+  // Convert text
   function handleText(e) {
     const inputText = e.target.value;
     setOutputText(arabicText(inputText)["reverse"]());
@@ -19,13 +21,29 @@ function App(props) {
     navigator.clipboard.writeText(text);
   }
 
+  // Paste text from clipboard
+  function pasteTextFromClipboard() {
+    navigator.clipboard.readText().then((text) => {
+      setOutputText(arabicText(text)["reverse"]());
+      setNormalText(text);
+    });
+  }
+
   return (
     <div>
       <div style={{ marginTop: 20 }} className="py-2 px-6">
-        <div className="flex justify-between items-center">
-          <div className="bottom-2 left-2 bg-black">
-            {/* <CopySvg tooltip="Paste" /> */}
-          </div>
+        <div
+          onClick={pasteTextFromClipboard}
+          className="flex justify-between items-center
+		  group relative"
+        >
+          <span
+            class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm
+			text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 translate-y-full opacity-0 m-4 mx-auto"
+          >
+            Tooltip
+          </span>
+          <PasteSvg />
           <label
             htmlFor="email"
             className="block text-right text-md font-medium leading-7 text-gray-700 select-none"
@@ -38,7 +56,13 @@ function App(props) {
             id="input-text"
             rows={9}
             className="form-input  block w-full sm:text-md sm:leading-5"
-            onChange={(e) => handleText(e)}
+            onChange={(e) => {
+              // Convert text
+              handleText(e);
+              // Set normal text
+              setNormalText(e.target.value);
+            }}
+            value={normalText}
             style={{ direction: "rtl" }}
           />
         </div>
@@ -49,17 +73,15 @@ function App(props) {
           <div
             className="bottom-2 left-2"
             onClick={() => {
-				// Copy text to clipboard
-				copyOutputToClipboard();
-				// Show alert
-				setTriggerCopyAlert(true);
-				// Hide alert after 2 seconds
-				setTimeout(() => {
-					setTriggerCopyAlert(false);
-				}
-				, 2000);
-				
-			}}
+              // Copy text to clipboard
+              copyOutputToClipboard();
+              // Show alert
+              setTriggerCopyAlert(true);
+              // Hide alert after 2 seconds
+              setTimeout(() => {
+                setTriggerCopyAlert(false);
+              }, 2000);
+            }}
           >
             <CopySvg />
           </div>
@@ -88,7 +110,7 @@ function App(props) {
           {outputText}
         </p>
       </div>
-	  
+
       {triggerCopyAlert && <AlertCopy />}
     </div>
   );
