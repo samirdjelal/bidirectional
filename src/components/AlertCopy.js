@@ -1,5 +1,5 @@
 import React from "react";
-function AlertCopy() {
+function AlertCopy({message}) {
   return (
     <div style={{
         position: "absolute",
@@ -13,7 +13,7 @@ function AlertCopy() {
         boxShadow: "0 0 10px 0 #00000020",
         userSelect: "none",
     }}>
-      Copied{" "}
+      {message.length > 0 ? message : "Alert "}
       <span role={"img"} aria-label="Copeid ">
         ✔️
       </span>

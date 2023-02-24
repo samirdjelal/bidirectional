@@ -9,7 +9,7 @@ function App(props) {
   // State
   const [normalText, setNormalText] = React.useState("");
   const [outputText, setOutputText] = React.useState("");
-  const [triggerCopyAlert, setTriggerCopyAlert] = React.useState(false);
+  const [triggerCopyAlert, setTriggerCopyAlert] = React.useState({active: false, label: ""});
   // Convert text
   function handleText(e) {
     const inputText = e.target.value;
@@ -33,16 +33,19 @@ function App(props) {
     <div>
       <div style={{ marginTop: 20 }} className="py-2 px-6">
         <div
-          onClick={pasteTextFromClipboard}
-          className="flex justify-between items-center
-		  group relative"
+          onClick={() => {
+            // Paste text from clipboard
+            pasteTextFromClipboard();
+            // Show alert
+            setTriggerCopyAlert({active: true, label: 'Pasted!'});
+            // Hide alert after 2 seconds
+            setTimeout(() => {
+              setTriggerCopyAlert({active: false, label: ''});
+            }
+            , 2000);
+          }}
+          className="flex justify-between items-center"
         >
-          <span
-            class="group-hover:opacity-100 transition-opacity bg-gray-800 px-1 text-sm
-			text-gray-100 rounded-md absolute left-1/2 -translate-x-1/2 translate-y-full opacity-0 m-4 mx-auto"
-          >
-            Tooltip
-          </span>
           <PasteSvg />
           <label
             htmlFor="email"
@@ -76,10 +79,10 @@ function App(props) {
               // Copy text to clipboard
               copyOutputToClipboard();
               // Show alert
-              setTriggerCopyAlert(true);
+              setTriggerCopyAlert({active: true, label: 'Copied!'});
               // Hide alert after 2 seconds
               setTimeout(() => {
-                setTriggerCopyAlert(false);
+                setTriggerCopyAlert({active: false, label: ''});
               }, 2000);
             }}
           >
@@ -110,8 +113,8 @@ function App(props) {
           {outputText}
         </p>
       </div>
-
-      {triggerCopyAlert && <AlertCopy />}
+      {/* Show alert if trigger is true, with the right message */}
+      {triggerCopyAlert.active && <AlertCopy message={triggerCopyAlert.label}/>}
     </div>
   );
 }
