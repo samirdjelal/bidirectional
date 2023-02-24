@@ -4,12 +4,16 @@ import CopySvg from "./components/CopySvg";
 import PasteSvg from "./components/PasteSvg";
 import arabicText from "./Converter";
 import AlertCopy from "./components/AlertCopy";
+import ClearSvg from "./components/ClearSvg";
 
 function App(props) {
   // State
   const [normalText, setNormalText] = React.useState("");
   const [outputText, setOutputText] = React.useState("");
-  const [triggerCopyAlert, setTriggerCopyAlert] = React.useState({active: false, label: ""});
+  const [triggerCopyAlert, setTriggerCopyAlert] = React.useState({
+    active: false,
+    label: "",
+  });
   // Convert text
   function handleText(e) {
     const inputText = e.target.value;
@@ -29,6 +33,12 @@ function App(props) {
     });
   }
 
+  // Clear text
+  function clearText() {
+    setNormalText("");
+    setOutputText("");
+  }
+
   return (
     <div>
       <div style={{ marginTop: 20 }} className="py-2 px-6">
@@ -37,12 +47,11 @@ function App(props) {
             // Paste text from clipboard
             pasteTextFromClipboard();
             // Show alert
-            setTriggerCopyAlert({active: true, label: 'Pasted!'});
+            setTriggerCopyAlert({ active: true, label: "Pasted!" });
             // Hide alert after 2 seconds
             setTimeout(() => {
-              setTriggerCopyAlert({active: false, label: ''});
-            }
-            , 2000);
+              setTriggerCopyAlert({ active: false, label: "" });
+            }, 2000);
           }}
           className="flex justify-between items-center"
         >
@@ -79,10 +88,10 @@ function App(props) {
               // Copy text to clipboard
               copyOutputToClipboard();
               // Show alert
-              setTriggerCopyAlert({active: true, label: 'Copied!'});
+              setTriggerCopyAlert({ active: true, label: "Copied!" });
               // Hide alert after 2 seconds
               setTimeout(() => {
-                setTriggerCopyAlert({active: false, label: ''});
+                setTriggerCopyAlert({ active: false, label: "" });
               }, 2000);
             }}
           >
@@ -96,8 +105,7 @@ function App(props) {
             النَّصُّ الْمُحَوِّلُ
           </label>
         </div>
-        <p
-          id="output-text"
+        <div
           style={{
             direction: "rtl",
             marginTop: 10,
@@ -110,11 +118,16 @@ function App(props) {
             wordBreak: "break-word",
           }}
         >
-          {outputText}
-        </p>
+          <button style={{outline: 0}} onClick={clearText}>
+            <ClearSvg width={18} height={18}/>
+          </button>
+          <p id="output-text">{outputText}</p>
+        </div>
       </div>
       {/* Show alert if trigger is true, with the right message */}
-      {triggerCopyAlert.active && <AlertCopy message={triggerCopyAlert.label}/>}
+      {triggerCopyAlert.active && (
+        <AlertCopy message={triggerCopyAlert.label} />
+      )}
     </div>
   );
 }
