@@ -2,26 +2,28 @@ import React from "react";
 import "./App.css";
 import CopySvg from "./components/CopySvg";
 import arabicText from "./Converter";
+import AlertCopy from "./components/AlertCopy";
 
 function App(props) {
+	// State
   const [outputText, setOutputText] = React.useState("");
-
+  const [triggerCopyAlert, setTriggerCopyAlert] = React.useState(false);
+  // Convert text 
   function handleText(e) {
     const inputText = e.target.value;
-	setOutputText(arabicText(inputText)["reverse"]());
+    setOutputText(arabicText(inputText)["reverse"]());
   }
+  //   Copy text to clipboardF
   function copyOutputToClipboard() {
-    const text = document.getElementById('output-text').innerHTML;
-    navigator.clipboard.writeText(text)
+    const text = document.getElementById("output-text").innerHTML;
+    navigator.clipboard.writeText(text);
   }
 
   return (
     <div>
-      <div style={{marginTop: 20}} className="py-2 px-6">
+      <div style={{ marginTop: 20 }} className="py-2 px-6">
         <div className="flex justify-between items-center">
-          <div
-            className="bottom-2 left-2 bg-black"
-          >
+          <div className="bottom-2 left-2 bg-black">
             {/* <CopySvg tooltip="Paste" /> */}
           </div>
           <label
@@ -46,7 +48,18 @@ function App(props) {
         <div className="flex justify-between">
           <div
             className="bottom-2 left-2"
-            onClick={() => copyOutputToClipboard()}
+            onClick={() => {
+				// Copy text to clipboard
+				copyOutputToClipboard();
+				// Show alert
+				setTriggerCopyAlert(true);
+				// Hide alert after 2 seconds
+				setTimeout(() => {
+					setTriggerCopyAlert(false);
+				}
+				, 2000);
+				
+			}}
           >
             <CopySvg />
           </div>
@@ -75,6 +88,8 @@ function App(props) {
           {outputText}
         </p>
       </div>
+	  
+      {triggerCopyAlert && <AlertCopy />}
     </div>
   );
 }
