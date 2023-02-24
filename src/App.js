@@ -42,20 +42,22 @@ function App(props) {
   return (
     <div>
       <div style={{ marginTop: 20 }} className="py-2 px-6">
-        <div
-          onClick={() => {
-            // Paste text from clipboard
-            pasteTextFromClipboard();
-            // Show alert
-            setTriggerCopyAlert({ active: true, label: "Pasted!" });
-            // Hide alert after 2 seconds
-            setTimeout(() => {
-              setTriggerCopyAlert({ active: false, label: "" });
-            }, 2000);
-          }}
-          className="flex justify-between items-center"
-        >
-          <PasteSvg />
+        <div className="flex justify-between items-center">
+          <div
+            className="bottom-2 left-2 "
+            onClick={() => {
+              // Paste text from clipboard
+              pasteTextFromClipboard();
+              // Show alert
+              setTriggerCopyAlert({ active: true, label: "Pasted!" });
+              // Hide alert after 2 seconds
+              setTimeout(() => {
+                setTriggerCopyAlert({ active: false, label: "" });
+              }, 2000);
+            }}
+          >
+            <PasteSvg />
+          </div>
           <label
             htmlFor="email"
             className="block text-right text-md font-medium leading-7 text-gray-700 select-none"
@@ -118,9 +120,19 @@ function App(props) {
             wordBreak: "break-word",
           }}
         >
-          <button style={{outline: 0}} onClick={clearText}>
-            <ClearSvg width={18} height={18}/>
-          </button>
+          <div style={{
+            display: "flex",
+            flexDirection:"row-reverse",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}>
+            <small style={{color: '#23232390', fontSize: 11, userSelect: 'none'}}>
+              output: {outputText.length + ' chars'}
+            </small>
+            <button style={{ outline: 0 }} onClick={clearText}>
+              <ClearSvg width={18} height={18} />
+            </button>
+          </div>
           <p id="output-text">{outputText}</p>
         </div>
       </div>
