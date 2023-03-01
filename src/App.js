@@ -2,9 +2,11 @@ import React from "react";
 import "./App.css";
 import CopySvg from "./components/CopySvg";
 import PasteSvg from "./components/PasteSvg";
-import arabicText from "./Converter";
+import arabicText from "./utils/converter";
 import AlertCopy from "./components/AlertCopy";
 import ClearSvg from "./components/ClearSvg";
+import History from "./components/History";
+import useHistory from "./utils/hooks/useHistory";
 
 function App(props) {
   // State
@@ -14,15 +16,18 @@ function App(props) {
     active: false,
     label: "",
   });
+  // Get History
+  const { items, addStringToHistory } = useHistory();
   // Convert text
   function handleText(e) {
     const inputText = e.target.value;
     setOutputText(arabicText(inputText)["reverse"]());
   }
-  //   Copy text to clipboardF
+  //   Copy text to clipboard
   function copyOutputToClipboard() {
-    const text = document.getElementById("output-text").innerHTML;
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(outputText);
+    // Add string to history
+    addStringToHistory(normalText);
   }
 
   // Paste text from clipboard
@@ -87,14 +92,16 @@ function App(props) {
           <div
             className="bottom-2 left-2"
             onClick={() => {
-              // Copy text to clipboard
-              copyOutputToClipboard();
-              // Show alert
-              setTriggerCopyAlert({ active: true, label: "Copied!" });
-              // Hide alert after 2 seconds
-              setTimeout(() => {
-                setTriggerCopyAlert({ active: false, label: "" });
-              }, 2000);
+              if (outputText.length > 0) {
+                // Copy text to clipboard
+                copyOutputToClipboard();
+                // Show alert
+                setTriggerCopyAlert({ active: true, label: "Copied!" });
+                // Hide alert after 2 seconds
+                setTimeout(() => {
+                  setTriggerCopyAlert({ active: false, label: "" });
+                }, 2000);
+              }
             }}
           >
             <CopySvg />
@@ -120,22 +127,35 @@ function App(props) {
             wordBreak: "break-word",
           }}
         >
-          <div style={{
-            display: "flex",
-            flexDirection:"row-reverse",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}>
-            <small style={{color: '#23232390', fontSize: 11, userSelect: 'none'}}>
-              output: {outputText.length + ' chars'}
-            </small>
-            <button style={{ outline: 0 }} onClick={clearText}>
-              <ClearSvg width={18} height={18} />
-            </button>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row-reverse",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            {outputText.length > 0 && (
+              <>
+                <small
+                  style={{
+                    color: "#23232390",
+                    fontSize: 11,
+                    userSelect: "none",
+                  }}
+                >
+                  output: {outputText.length + " chars"}
+                </small>
+                <button style={{ outline: 0 }} onClick={clearText}>
+                  <ClearSvg width={18} height={18} />
+                </button>
+              </>
+            )}
           </div>
           <p id="output-text">{outputText}</p>
         </div>
       </div>
+      {items.length > 0 && <History history={items} />}
       {/* Show alert if trigger is true, with the right message */}
       {triggerCopyAlert.active && (
         <AlertCopy message={triggerCopyAlert.label} />
