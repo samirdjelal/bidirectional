@@ -20,19 +20,26 @@ function History({ history }) {
         flexDirection: "column",
       }}
     >
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <b>History</b>
         <div onClick={() => clearHistory()}>
           <ClearSvg />
         </div>
       </div>
-      {history.map((item, index) => (
-        <HistoryItem item={item} key={index} />
-      ))}
+      <div style={{
+        display: "flex",
+        flexDirection: "column-reverse",
+      }}>
+        {history.map((item, index) => (
+          <HistoryItem item={item} key={index} />
+        ))}
+      </div>
     </div>
   );
 }

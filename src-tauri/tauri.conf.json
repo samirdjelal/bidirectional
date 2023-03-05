@@ -55,8 +55,7 @@
         "width": 400,
         "height": 600,
         "resizable": false,
-        "fullscreen": false,
-        "alwaysOnTop": true
+        "fullscreen": false
       }
     ],
     "security": {
