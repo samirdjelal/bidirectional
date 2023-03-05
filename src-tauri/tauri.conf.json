@@ -51,11 +51,24 @@
     },
     "windows": [
       {
+        "label": "main",
         "title": "Bidirectional",
+        "x": 100,
+        "y": 100,
         "width": 400,
         "height": 600,
         "resizable": false,
         "fullscreen": false
+      },
+      {
+        "label": "translate",
+        "title": "Bidirectional Translate",
+        "width": 400,
+        "height": 600,
+        "x": 510,
+        "y": 100,
+        "resizable": false,
+        "url": "https://translate.google.com/?sl=en&tl=ar&op=translate"
       }
     ],
     "security": {
