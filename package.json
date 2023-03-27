@@ -1,7 +1,7 @@
 {
 	"name": "bidirectional",
 	"description": "Write Arabic text on apps that doesn't support bidirectional text.",
-	"version": "0.1.1",
+	"version": "0.3.0",
 	"author": "Samir Djelal <samir.djelal.webdesign@gmail.com>",
 	"private": true,
 	"homepage": "./",
