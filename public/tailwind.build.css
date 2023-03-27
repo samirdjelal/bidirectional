@@ -454,7 +454,8 @@ textarea::placeholder {
   color: #a0aec0;
 }
 
-button {
+button,
+[role="button"] {
   cursor: pointer;
 }
 
@@ -583,12 +584,6 @@ video {
   border-color: #a4cafe;
 }
 
-.bg-gray-100 {
-  --bg-opacity: 1;
-  background-color: #f4f5f7;
-  background-color: rgba(244, 245, 247, var(--bg-opacity));
-}
-
 .bg-gray-800 {
   --bg-opacity: 1;
   background-color: #252f3f;
@@ -608,7 +603,6 @@ video {
 }
 
 .flex {
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
@@ -618,43 +612,51 @@ video {
 }
 
 .items-center {
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+      align-items: center;
 }
 
 .justify-between {
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
 }
 
 .font-medium {
   font-weight: 500;
 }
 
-.font-bold {
-  font-weight: 700;
-}
-
 .h-5 {
   height: 1.25rem;
 }
 
-.text-xl {
-  font-size: 1.25rem;
+.text-sm {
+  font-size: 0.875rem;
 }
 
 .leading-7 {
   line-height: 1.75rem;
 }
 
+.m-4 {
+  margin: 1rem;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .mt-1 {
   margin-top: 0.25rem;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
+.opacity-0 {
+  opacity: 0;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 .py-2 {
@@ -662,18 +664,13 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
 }
 
-.fixed {
-  position: fixed;
+.absolute {
+  position: absolute;
 }
 
 .relative {
@@ -688,22 +685,22 @@ video {
   left: 0.5rem;
 }
 
-.shadow-sm {
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+.left-1\/2 {
+  left: 50%;
 }
 
-.text-center {
-  text-align: center;
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 .text-right {
   text-align: right;
 }
 
-.text-white {
+.text-gray-100 {
   --text-opacity: 1;
-  color: #ffffff;
-  color: rgba(255, 255, 255, var(--text-opacity));
+  color: #f4f5f7;
+  color: rgba(244, 245, 247, var(--text-opacity));
 }
 
 .text-gray-600 {
@@ -736,6 +733,18 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.-translate-x-1\/2 {
+  --transform-translate-x: -50%;
+}
+
+.translate-y-full {
+  --transform-translate-y: 100%;
+}
+
+.transition-opacity {
+  transition-property: opacity;
 }
 
 @-webkit-keyframes spin {

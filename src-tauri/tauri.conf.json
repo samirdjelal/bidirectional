@@ -6,8 +6,8 @@
   "build": {
     "distDir": "../build",
     "devPath": "http://localhost:3000/",
-    "beforeDevCommand": "npm run start",
-    "beforeBuildCommand": ""
+    "beforeDevCommand": "yarn start",
+    "beforeBuildCommand": "yarn build"
   },
   "tauri": {
     "bundle": {
@@ -28,13 +28,11 @@
       "shortDescription": "",
       "longDescription": "",
       "deb": {
-        "depends": [],
-        "useBootstrapper": false
+        "depends": []
       },
       "macOS": {
         "frameworks": [],
         "minimumSystemVersion": "",
-        "useBootstrapper": false,
         "exceptionDomain": "",
         "signingIdentity": null,
         "entitlements": null
@@ -53,8 +51,11 @@
     },
     "windows": [
       {
+        "label": "main",
         "title": "Bidirectional",
-        "width": 450,
+        "x": 100,
+        "y": 100,
+        "width": 400,
         "height": 600,
         "resizable": false,
         "fullscreen": false
